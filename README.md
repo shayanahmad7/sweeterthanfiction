@@ -1,117 +1,164 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
-
-(__TODO__: your project name)
-
-# Shoppy Shoperson 
+# Sweeter Than Fiction
 
 ## Overview
 
-(__TODO__: a brief one or two paragraph, high-level description of your project)
+Sweeter Than Fiction is a community web app designed exclusively for Taylor Swift enthusiasts. It serves as a hub for fans to explore Taylor Swift's extensive discography, engage in discussions, and document their Swiftie journey. Here are the key features:
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
-
+- Users can create an account and log in.
+- Access a comprehensive database of Taylor Swift's songs and albums.
+- Search for songs directly or explore albums to view their tracklists.
+- View detailed information about each song, including lyrics and descriptions.
+- Engage in discussions about songs, albums, and Taylor Swift in general.
+- Create and edit wishlists, allowing users to document their current favorite songs and share their thoughts with the community.
 
 ## Data Model
 
-(__TODO__: a description of your application's data and their relationships to each other) 
+Sweeter Than Fiction will utilize the following data model:
 
-The application will store Users, Lists and Items
+- **Users**
+  - Name
+  - Email
+  - Username
+  - Birthday
+  - Password (hashed)
 
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
+- **Albums**
+  - Title
+  - Release Date
+  - Awards
+  - List of Songs
 
-(__TODO__: sample documents)
+- **Songs**
+  - Title
+  - Lyrics
+  - Description
+  - Album
+  - Discussion Comments
 
-An Example User:
+- **Discussion Posts**
+  - User
+  - Content
+  - Timestamp
 
-```javascript
-{
-  username: "shannonshopper",
-  hash: // a password hash,
-  lists: // an array of references to List documents
-}
-```
+- **Wishlist**
+  - User
+  - Song
+  - Description
+  - Timestamp (for each edit)
 
-An Example List with Embedded Items:
+## User Authentication
 
-```javascript
-{
-  user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
-  createdAt: // timestamp
-}
-```
+Sweeter Than Fiction will implement a straightforward user authentication process. When registering, users will be prompted to provide the following information:
 
+- Name
+- Email
+- Username
+- Birthday
+- Password (hashed)
 
-## [Link to Commented First Draft Schema](db.mjs) 
+To log in, users will need to enter either their email or username along with their password.
 
-(__TODO__: create a first draft of your Schemas in db.mjs and link to it)
+Passwords will be securely hashed before being stored in the database to ensure user security.
 
 ## Wireframes
 
-(__TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc.)
+### /home - Homepage
 
-/list/create - page for creating a new shopping list
+![home](documentation/home.png)
 
-![list create](documentation/list-create.png)
+### /album - Album Details
 
-/list - page for showing all shopping lists
+![album details](documentation/album-details.png)
 
-![list](documentation/list.png)
+### /song - Song Details
 
-/list/slug - page for showing specific shopping list
+![song details](documentation/song-details.png)
 
-![list](documentation/list-slug.png)
+### /discussion - Discussion Page
 
-## Site map
+![discussion page](documentation/discussion-page.png)
 
-(__TODO__: draw out a site map that shows how pages are related to each other)
+### /wishlist - Wishlist Page
 
-Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia/commons/2/20/Sitemap_google.jpg), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
+![wishlist](documentation/wishlist.png)
+
+### /profile - User Profile
+
+![user profile](documentation/user-profile.png)
+
+## Site Map
+
+- Home Page
+  - Login
+  - Register
+
+- User Dashboard
+  - Profile
+    - Name
+    - Email
+    - Username
+    - Birthday
+  - Albums
+    - List of Albums
+      - Album Details
+        - Song List
+          - Song Details
+            - Lyrics
+            - Description
+        - Discussion Section
+  - Wishlists
+    - List of Wishlists
+      - Wishlist Details
+        - Wishlist Items
+          - Wishlist Item Details
+            - Description
+            - Timestamp (for each edit)
+        - Discussion Section
+
+- Discussions
+  - General Discussion
+    - Posts
+      - Post Details
+        - Comments
+  - Album Discussions
+    - List of Albums
+      - Album Discussion
+        - Posts
+          - Post Details
+            - Comments
+  - Song Discussions
+    - List of Songs
+      - Song Discussion
+        - Posts
+          - Post Details
+            - Comments
+
 
 ## User Stories or Use Cases
 
-(__TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://en.wikipedia.org/wiki/Use_case))
-
-1. as non-registered user, I can register a new account with the site
-2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+1. As a Taylor Swift fan, I want to be able to create an account on the website so that I can engage with the community and access the features.
+2. As a registered user, I want to log in to the site with my email or username and password.
+3. As a user, I want to explore Taylor Swift's albums and view the tracklists.
+4. As a user, I want to view detailed information about each song, including lyrics and descriptions.
+5. As a user, I want to participate in discussions about songs, albums, and Taylor Swift in general.
+6. As a user, I want to create and edit wishlists to document my current favorite songs and share my thoughts with the community.
 
 ## Research Topics
 
-(__TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed)
+- (5 points) Integrate user authentication
+    - Utilize basic user information (Name, Email, Username, Birthday, Password) for registration and login.
 
-* (5 points) Integrate user authentication
-    * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
-* (4 points) Perform client side form validation using a JavaScript library
-    * see <code>cs.nyu.edu/~jversoza/ait-final/my-form</code>
-    * if you put in a number that's greater than 5, an error message will appear in the dom
-* (5 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
+- (4 points) Implement client-side form validation using JavaScript library.
 
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit)
+- (5 points) Utilize vue.js as the frontend framework for a dynamic user experience.
 
+Total Points: 14 (Exceeding the required 8 points)
 
-## [Link to Initial Main Project File](app.mjs) 
+## Link to Initial Main Project File
 
-(__TODO__: create a skeleton Express application with a package.json, app.mjs, views folder, etc. ... and link to your initial app.mjs)
+[Link to Initial Main Project File](app.mjs)
 
 ## Annotations / References Used
 
-(__TODO__: list any tutorials/references/etc. that you've based your code off of)
-
 1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
 2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this)
-
