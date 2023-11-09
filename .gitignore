@@ -1,3 +1,18 @@
-node_modules
-*.swo
+# Dependency directory
+node_modules/
+
+# Environment variables
+.env
+
+# Editor directories and files
+.vscode/
 *.swp
+*~
+
+# Operating system files
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
