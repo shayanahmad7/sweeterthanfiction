@@ -1,0 +1,15 @@
+/* Add this CSS file to a 'public/css' directory in your project */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f3eaff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h2 {
+    color: #5c4b6b;
+  }
+  
+  /* Add more styles as needed */
+  
