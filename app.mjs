@@ -1,56 +1,28 @@
-// app.mjs
-import express from 'express';
+import express from 'express'
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import session from 'express-session';
-import expressHandlebars from 'express-handlebars';
+import { fileURLToPath } from 'url';
 import path from 'path';
-import './config.mjs'; // Load environment variables
-import User from './models/User.js'; // Import the User model
 
-const __dirname = path.resolve();
+
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// View engine setup
-app.engine('hbs', expressHandlebars({
-  defaultLayout: 'layout',
-  extname: '.hbs'
-}));
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+// MongoDB connection setup
+const mongoDB = 'mongodb://127.0.0.1:27017/sweeterthanfiction';
 
-// Middleware for parsing application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
 
-// Connect to MongoDB
-mongoose.connect(process.env.DB_URI)
+mongoose.connect(mongoDB)
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch(err => console.error(err));
 
-// Routes
-// Home route serving registration form
+
+// Simple root route
 app.get('/', (req, res) => {
-  res.render('home');
+  res.send('Welcome to Sweeter Than Fiction!');
 });
 
-// Handle the registration form submission
-app.post('/register', async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const user = new User({
-      username: req.body.username,
-      password: hashedPassword,
-    });
-    await user.save();
-    res.redirect('/login');
-  } catch (error) {
-    res.redirect('/register');
-    console.error('Registration error:', error);
-  }
-});
 
 // Start the server
 const PORT = process.env.PORT || 3000;
