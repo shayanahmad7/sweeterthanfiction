@@ -1,10 +1,16 @@
+<!-- views/layout.hbs -->
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sweeter Than Fiction</title>
+  <title>{{title}} - Sweeter Than Fiction</title>
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-  {{{body}}}
+  <header>
+    <h1>Sweeter Than Fiction</h1>
+  </header>
+  
+  {{{body}}} <!-- This is where the content from home.hbs will be rendered -->
+
 </body>
 </html>
