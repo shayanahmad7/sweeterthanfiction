@@ -1,21 +1,11 @@
 <!-- views/home.hbs -->
-{{!< layout}}
+{{!< layout }}
+<div class="content-container">
+  <h2>Welcome to Sweeter Than Fiction!</h2>
+  <p>Explore the magical world of Taylor Swift's music, lyrics, and community discussions!</p>
+  <div class="button-container">
+    <button onclick="location.href='/register'">Register</button>
+    <button onclick="location.href='/login'">Login</button>
+  </div>
+</div>
 
-<h2>Welcome to Sweeter Than Fiction</h2>
-<p>Find your favorite Taylor Swift songs, discuss lyrics, and more!</p>
-{{!-- 
-<!-- Registration Form -->
-<h3>Create an Account</h3>
-<form action="/register" method="POST">
-  <div>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-  </div>
-  <div>
-    <button type="submit">Register</button>
-  </div>
-</form> --}}

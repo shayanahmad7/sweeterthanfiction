@@ -1,6 +1,7 @@
 {
   "name": "final-project-shayanahmad7",
   "version": "1.0.0",
+  "type": "module",
   "description": "Sweeter Than Fiction is a community web app designed exclusively for Taylor Swift enthusiasts. It serves as a hub for fans to explore Taylor Swift's extensive discography, engage in discussions, and document their Swiftie journey. Here are the key features:",
   "main": "index.js",
   "scripts": {
@@ -19,6 +20,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^5.1.0",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
