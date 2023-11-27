@@ -8,7 +8,7 @@ import path from 'path';
 import { engine } from 'express-handlebars';
 import flash from 'connect-flash'; // Flash messages middleware
 import './config.mjs'; // Load environment variables
-import User from './models/User.js'; // Import the User model
+import User from './models/user.js'; // Import the User model
 
 const app = express();
 const __dirname = path.resolve();
