@@ -11,21 +11,32 @@ body {
   min-height: 100vh; /* Full viewport height */
 }
 
-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: url('/images/taylor-background.png') no-repeat  right;
+
+
+.taylor-bg {
+
+  background: url('/images/taylor-background.png') no-repeat right;
   background-size: cover;
-  opacity: 1; /* Adjust transparency */
-  z-index: -1;
+  opacity: 1;
+  
+}
+
+.userhome-bg {
+  background: url('/images/userhomebackground.jpg') no-repeat right;
+  background-size: cover;
+  opacity: 1;
 }
 
 h2 {
   color: #5c4b6b;
+
+}
+
+h3 {
+  color: #5c4b6b;
+  text-align: left;
+  padding-left: 50px;
+
 }
 
 h1 {
@@ -67,4 +78,128 @@ button:hover {
   align-items: center; /* Center items horizontally */
   padding-left: 250px; /* Add some padding if needed */
   z-index: 1; /* Ensure it's above the background */
+}
+
+.content-container2 {
+  width: 100%; /* Take up the right half of the screen */
+  height: 100vh; /* Full height of the viewport */
+  text-align: center;
+
+
+}
+
+.search-form input[type="text"] { 
+  width: 100%; /* This will make the input field take the full width of its parent .search-form container */
+  padding: 10px; /* Adjust padding for better visual appeal */
+  margin: 8px 0; /* Add some margin to the top and bottom if needed */
+  text-align: center;
+  border: 1px solid #cccccc; /
+  
+}
+
+.heart-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5em;
+  color: grey; /* Default color */
+}
+
+.heart-btn.added {
+  color: red; /* Color for when a song is in the wishlist */
+}
+
+
+.empty-wishlist p {
+  font-size: 1.2em;
+  text-align: center;
+  color: #5c4b6b; /* Adjust the color to fit your design */
+}
+
+/* Styling for the wishlist introduction */
+.content-container h2 {
+  text-align: center;
+  color: #5c4b6b;
+}
+
+.content-container p {
+  text-align: center;
+  color: #5c4b6b;
+  margin-bottom: 20px;
+}
+
+/* Styles for Discography Page */
+.discography-table {
+  width: 80%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background-color: transparent;
+  table-layout: fixed; /* Fixed table layout */
+}
+
+.discography-table th, .discography-table td {
+  border: 1px solid #ccc;
+  padding: 5px; /* Reduced padding for compactness */
+  text-align: center;
+  color: #5c4b6b;
+  word-wrap: break-word; /* Ensure text wraps in cells */
+  /* Set fixed width for each column */
+  width: 33.33%;
+}
+
+.discography-table th {
+  background-color: #7a6890;
+  color: white;
+}
+
+.discography-table tbody {
+  display: block;
+  max-height: 500px; /* Set a max height for scroll */
+  overflow-y: auto; /* Add vertical scroll */
+}
+
+.discography-table thead tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* Fixed layout for the header */
+}
+
+.external-links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.link-button {
+  text-decoration: none;
+  color: white;
+  background-color: #1db954; /* Spotify green */
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin: 5px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.link-button:hover {
+  background-color: #128737; /* Darker green for hover effect */
+}
+
+.link-button:nth-child(2) {
+  background-color: #E4405F; /* Instagram color */
+}
+
+.link-button:nth-child(2):hover {
+  background-color: #c32f4b; /* Darker color for Instagram button hover */
+}
+
+.link-button:nth-child(3) {
+  background-color: #ff6b6b; /* Color for Taylor's official website button */
+}
+
+.link-button:nth-child(3):hover {
+  background-color: #db5a5a; /* Darker color for website button hover */
+}
+
+.fa {
+  margin-right: 8px;
 }

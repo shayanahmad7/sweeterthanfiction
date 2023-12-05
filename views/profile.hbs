@@ -1,0 +1,29 @@
+{{!< layout }}
+<body class="userhome-bg">
+    <div class="content-container2">
+        <h2>User Profile</h2>
+        <!-- Display User Information -->
+        <div class="user-info">
+            <p><strong>Name:</strong> {{user.name}}</p>
+            <p><strong>Username:</strong> {{user.username}}</p>
+            <p><strong>Bio:</strong> {{user.bio}}</p>
+        </div>
+
+        <!-- Edit Form -->
+        <h2>Edit Profile</h3>
+        <form action="/update-profile" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{user.name}}">
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="{{user.username}}">
+
+            <label for="bio">Bio:</label>
+            <textarea id="bio" name="bio">{{user.bio}}</textarea>
+            <div class="button-container">
+                <button type="submit">Update Profile</button>
+            </div>
+            
+        </form>
+    </div>
+</body>

@@ -1,0 +1,30 @@
+{{!< layout }}
+<body class="userhome-bg">
+    <div class="content-container2">
+        <h2>Welcome to the entire discography of Taylor's amazing songs. Browse to add them to your OnMyMind.</h2>
+        <table class="discography-table">
+            <thead>
+                <tr>
+                    <th>Track Name</th>
+                    <th>Album Name</th>
+                    <th>Add to OnMyMind</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each songs}}
+                <tr>
+                    <td>{{this.track_name}}</td>
+                    <td>{{this.album_name}}</td>
+                    <td>
+                       <button class="heart-btn {{#if (isInWishlist this._id ../onMyMindIds)}}added{{/if}}" 
+            data-song-id="{{this._id}}">{{#if (isInWishlist this._id ../onMyMindIds)}}❤️{{else}}🤍{{/if}}</button>
+  
+ 
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    
+</body>

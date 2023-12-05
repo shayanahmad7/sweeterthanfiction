@@ -8,6 +8,8 @@ import path from 'path';
 import { engine } from 'express-handlebars';
 import './config.mjs';
 import User from './models/user.js'; 
+import Song from './models/song.js';
+
 
 const app = express();
 const __dirname = path.resolve();
@@ -16,13 +18,31 @@ const __dirname = path.resolve();
 app.engine('hbs', engine({
   defaultLayout: 'layout',
   extname: '.hbs',
-  layoutsDir: path.join(__dirname, 'views')
+  layoutsDir: path.join(__dirname, 'views'),
+  // Add runtime options and helpers directly here
+  runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true,
+  },
+  helpers: {
+    isInWishlist: function (songId, wishlist) {
+      // Ensure that both songId and wishlist are defined
+      if (!songId || !wishlist) return false;
+      return wishlist.includes(songId.toString());
+    }
+  }
+
 }));
+
+
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Serve static files (like CSS)
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.json());
+
 
 // MongoDB connection setup
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -101,11 +121,142 @@ app.post('/login', passport.authenticate('local', {
   failureFlash: false
 }));
 
-// User home route
-app.get('/userhome', (req, res) => {
+app.get('/userhome', async (req, res) => {
   if (!req.user) return res.redirect('/login');
-  res.render('userhome', { name: req.user.name });
+
+  // Filter out null values and then map over the onMyMind array
+  const onMyMindIds = (req.user.onMyMind || []).filter(songId => songId).map(songId => songId.toString());
+  
+  res.render('userhome', {
+    name: req.user.name,
+    onMyMindIds
+  });
 });
+
+
+
+// Route for the search functionality
+app.get('/search', async (req, res) => {
+  const query = req.query.query;
+
+  // Handle empty search query
+  if (!query) {
+    return res.render('userhome', { searchResults: [], searchEmpty: true, name: req.user.name });
+  }
+
+  try {
+    // Update search logic: search for whole words
+    const searchResults = await Song.find({
+      track_name: { $regex: `\\b${query}\\b`, $options: 'i' }
+    });
+    if (searchResults.length === 0) {
+      res.render('userhome', { message: `No search results to display :( `, name: req.user.name });
+    } else {
+      res.render('userhome', { searchResults, name: req.user.name });
+    }
+
+    
+  } catch (error) {
+    res.render('userhome', { error: 'No results found', name: req.user.name });
+  }
+});
+
+// Route for the wishlist page
+app.get('/on-my-mind', async (req, res) => {
+  if (!req.user) return res.redirect('/login');
+  
+
+  try {
+    const user = await User.findById(req.user.id).populate('onMyMind');
+  
+    res.render('wishlist', { onMyMind: user.onMyMind });
+  } catch (error) {
+    
+    res.status(500).send('Error accessing wishlist');
+  }
+});
+
+// Add to wishlist route
+app.post('/add-to-wishlist', async (req, res) => {
+  const songId = req.body.songId;
+  const userId = req.user.id; // Assuming you have user authentication in place
+
+  try {
+    // Add the songId to the user's onMyMind array if it's not already there
+    await User.updateOne(
+      { _id: userId },
+      { $addToSet: { onMyMind: songId } } // $addToSet avoids duplicates
+    );
+    res.status(200).json({ message: "Added to wishlist" });
+  } catch (error) {
+    console.error("Error adding to wishlist:", error);
+    res.status(500).json({ message: "Error adding to wishlist" });
+  }
+});
+
+// Remove from wishlist route
+app.post('/remove-from-wishlist', async (req, res) => {
+  const songId = req.body.songId;
+  const userId = req.user.id; // Assuming you have user authentication in place
+
+  try {
+    // Remove the songId from the user's onMyMind array
+    await User.updateOne(
+      { _id: userId },
+      { $pull: { onMyMind: songId } } // $pull removes the item from the array
+    );
+    res.status(200).json({ message: "Removed from wishlist" });
+  } catch (error) {
+    console.error("Error removing from wishlist:", error);
+    res.status(500).json({ message: "Error removing from wishlist" });
+  }
+});
+// User profile route
+app.get('/profile', async (req, res) => {
+  if (!req.user) return res.redirect('/login');
+
+  try {
+    // Fetch the user's details
+    const user = await User.findById(req.user.id);
+
+    // Render the profile page with the user's data
+    res.render('profile', { user: user });
+  } catch (error) {
+    console.error("Error accessing user profile:", error);
+    res.status(500).send('Error accessing profile');
+  }
+});
+// Route to handle profile update
+app.post('/update-profile', async (req, res) => {
+  if (!req.user) return res.redirect('/login');
+
+  try {
+      const userId = req.user.id;
+      const { name, username, bio } = req.body;
+      await User.findByIdAndUpdate(userId, { name, username, bio });
+      res.redirect('/profile');
+  } catch (error) {
+      res.status(500).send('Error updating profile');
+  }
+});
+
+app.get('/discography', async (req, res) => {
+  if (!req.user) return res.redirect('/login');
+
+  try {
+    const songs = await Song.find({}).sort({ track_release: 1, track_number: 1 });
+
+    // Filter out null values and then map over the onMyMind array
+    const onMyMindIds = (req.user.onMyMind || []).filter(songId => songId).map(songId => songId.toString());
+
+    res.render('discography', { songs: songs, onMyMindIds: onMyMindIds });
+  } catch (error) {
+    console.error("Error in /discography route:", error);
+    res.status(500).send('Error accessing discography');
+  }
+});
+
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;

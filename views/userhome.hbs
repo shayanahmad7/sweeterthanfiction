@@ -1,7 +1,55 @@
 {{!< layout }}
+<body class="userhome-bg">
+  <div class="content-container2">
+    <h3>Hello Mellow {{name}} 🫶💕 </h3>
+    
+    <div class="button-container">
+      <!-- On My Mind Button -->
+      <button onclick="location.href='/on-my-mind'">On My Mind</button>
+      <button onclick="location.href='/profile'">My Profile</button>
+      <button onclick="location.href='/discography'">Discography</button>
+    </div>
+    
+    <div class="search-form">
+      <!-- Search Form -->
+      <form action="/search" method="GET">
+        <input type="text" name="query" placeholder="Search for songs to add to your wishlist">
+        <div class="button-container">
+          <button type="submit">Search</button>
+        </div>
+      </form>
+      
+      <!-- Display search results or message -->
+      {{#if searchResults}}
+        <h2>Search Results</h2>
+        <ul>
+          {{#each searchResults}}
+            <li>
+              {{this.track_name}} - {{this.album_name}}
+              <button class="heart-btn {{#if (isInWishlist this._id ../onMyMindIds)}}added{{/if}}" 
+            data-song-id="{{this._id}}">{{#if (isInWishlist this._id ../onMyMindIds)}}❤️{{else}}🤍{{/if}}</button>
 
-<div class="content-container">
-  <h2>Welcome {{name}}!</h2>
-  <p>Your Swiftie home awaits!</p>
-  <!-- Additional content for the user's home page -->
+
+
+          {{/each}}
+        </ul>
+      {{else}}
+        <p>{{message}}</p>
+      {{/if}}
+    </div>
+    
+
+    <div class="external-links">
+    <a href="https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02" target="_blank" class="link-button">
+      <i class="fa fa-spotify"></i> Spotify
+    </a>
+    <a href="https://www.instagram.com/taylorswift" target="_blank" class="link-button">
+      <i class="fa fa-instagram"></i> Instagram
+    </a>
+    <a href="https://www.taylorswift.com/" target="_blank" class="link-button">
+      Official Website
+    </a>
+  </div>
 </div>
+
+</body>

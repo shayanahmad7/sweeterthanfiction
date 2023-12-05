@@ -1,0 +1,20 @@
+{{!< layout }}
+<body class="userhome-bg">
+  <div class="content-container2">
+    <h2>Hi Swiftie! This is your wishlist.</h2>
+    <p>Songs that are on your mind right now, the ones you're obsessed with and loving. Share them with others or keep them as a log of your journey as a Swiftie.</p>
+
+    {{#if onMyMind.length}}
+      <ul>
+        {{#each onMyMind}}
+          <li>{{this.track_name}} - {{this.album_name}}</li>
+        {{/each}}
+      </ul>
+    {{else}}
+      <div class="empty-wishlist">
+        <p>😔 Your wishlist is empty.</p>
+        <p>Search for songs on your home page to add them to your wishlist!</p>
+      </div>
+    {{/if}}
+  </div>
+</body>
