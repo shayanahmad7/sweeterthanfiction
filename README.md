@@ -11,9 +11,51 @@ Sweeter Than Fiction is a community web app designed exclusively for Taylor Swif
 - Engage in discussions about songs, albums, and Taylor Swift in general.
 - Create and edit wishlists, allowing users to document their current favorite songs and share their thoughts with the community.
 
+## Features Achieved
+
+### User Authentication
+
+Sweeter Than Fiction has implemented a straightforward user authentication process. Users can register by providing the following information:
+
+- Name
+- Email
+- Username
+- Birthday
+- Password (hashed)
+
+To log in, users can enter either their email or username along with their password.
+
+Passwords are securely hashed before being stored in the database to ensure user security.
+
+### User Dashboard
+
+The user dashboard provides the following features:
+
+- Profile page displaying user information.
+- Access to a list of albums with details.
+- Access to song details including lyrics and descriptions.
+- Participation in discussions.
+- Creation and editing of wishlists.
+
+### Discussions
+
+Sweeter Than Fiction allows users to engage in discussions on various topics, including general discussions, album discussions, and song discussions.
+
+### Client-Side Form Validation
+
+Client-side form validation has been implemented to enhance the user experience. The following fields are validated:
+
+- Name (All letters)
+- Username (Letters and numbers, unique)
+- Password (8 characters, alphanumeric)
+
+## Features Pending Due to Time Constraints
+
+- Utilization of vue.js as the frontend framework for dynamic user interactions.
+
 ## Data Model
 
-Sweeter Than Fiction will utilize the following data model:
+Sweeter Than Fiction utilizes the following data model:
 
 - **Users**
   - Name
@@ -45,94 +87,6 @@ Sweeter Than Fiction will utilize the following data model:
   - Song
   - Description
   - Timestamp (for each edit)
-
-## User Authentication
-
-Sweeter Than Fiction will implement a straightforward user authentication process. When registering, users will be prompted to provide the following information:
-
-- Name
-- Email
-- Username
-- Birthday
-- Password (hashed)
-
-To log in, users will need to enter either their email or username along with their password.
-
-Passwords will be securely hashed before being stored in the database to ensure user security.
-
-## Wireframes
-
-### /home - Homepage
-
-![home](documentation/home.png)
-
-### /album - Album Details
-
-![album details](documentation/album-details.png)
-
-### /song - Song Details
-
-![song details](documentation/song-details.png)
-
-### /discussion - Discussion Page
-
-![discussion page](documentation/discussion-page.png)
-
-### /wishlist - Wishlist Page
-
-![wishlist](documentation/wishlist.png)
-
-### /profile - User Profile
-
-![user profile](documentation/user-profile.png)
-
-## Site Map
-
-- Home Page
-  - Login
-  - Register
-
-- User Dashboard
-  - Profile
-    - Name
-    - Email
-    - Username
-    - Birthday
-  - Albums
-    - List of Albums
-      - Album Details
-        - Song List
-          - Song Details
-            - Lyrics
-            - Description
-        - Discussion Section
-  - Wishlists
-    - List of Wishlists
-      - Wishlist Details
-        - Wishlist Items
-          - Wishlist Item Details
-            - Description
-            - Timestamp (for each edit)
-        - Discussion Section
-
-- Discussions
-  - General Discussion
-    - Posts
-      - Post Details
-        - Comments
-  - Album Discussions
-    - List of Albums
-      - Album Discussion
-        - Posts
-          - Post Details
-            - Comments
-  - Song Discussions
-    - List of Songs
-      - Song Discussion
-        - Posts
-          - Post Details
-            - Comments
-
 
 ## User Stories or Use Cases
 

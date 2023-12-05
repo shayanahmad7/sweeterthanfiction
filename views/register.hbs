@@ -1,24 +1,32 @@
 {{!< layout }}
 <body class="taylor-bg">
     <div class="content-container">
-    <h2>Join the Swiftie Community!</h2>
-    <p>We're so happy to see you here!</p>
-    <form action="/register" method="POST">
-        <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        </div>
-        <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        </div>
-        <div class="button-container">
-        <button type="submit">Register</button>
-        </div>
-    </form>
+        <h2>Join the Swiftie Community!</h2>
+        <p>We're so happy to see you here!</p>
+        <form action="/register" method="POST" onsubmit="return validateRegisterForm()">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required oninput="validateName()">
+                <span id="name-error" class="form-error"></span>
+            </div>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required oninput="validateUsername()">
+                <span id="username-error" class="form-error"></span>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required oninput="validatePassword()">
+                <span id="password-error" class="form-error"></span>
+            </div>
+            <!-- General error message for the entire form -->
+            <div class="form-general-error">
+                <span id="form-error" class="form-error"></span>
+            </div>
+            <div class="button-container">
+                <button type="submit">Register</button>
+            </div>
+        </form>
     </div>
+    <script src="/js/formValidation.js"></script>
 </body>

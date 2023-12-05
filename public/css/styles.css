@@ -242,3 +242,10 @@ button:hover {
   font-size: 0.8em;
   color: #666;
 }
+
+.form-error {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
+  display: block; /* Ensure error messages are displayed below input fields */
+}
