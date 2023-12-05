@@ -29,6 +29,12 @@ app.engine('hbs', engine({
       // Ensure that both songId and wishlist are defined
       if (!songId || !wishlist) return false;
       return wishlist.includes(songId.toString());
+    },
+    formatDate: function (date) {
+      return date.toLocaleDateString("en-US");
+    },
+    formatLyrics: function (lyrics) {
+      return lyrics.replace(/\n/g, '<br>');
     }
   }
 
@@ -255,6 +261,42 @@ app.get('/discography', async (req, res) => {
     res.status(500).send('Error accessing discography');
   }
 });
+
+// Route to display song info
+app.get('/song-info/:songId', async (req, res) => {
+  try {
+    const song = await Song.findById(req.params.songId).populate('comments');
+    if (!song) {
+      return res.status(404).send('Song not found');
+    }
+    res.render('info', { song: song, user: req.user });
+  } catch (error) {
+    console.error("Error accessing song info:", error);
+    res.status(500).send('Error accessing song info');
+  }
+});
+
+//Route to add user comment
+app.post('/add-comment/:songId', async (req, res) => {
+  if (!req.user) return res.redirect('/login');
+
+  try {
+    const songId = req.params.songId;
+    const newComment = {
+      username: req.user.username, // Using logged-in user's username
+      text: req.body.text,
+      timestamp: new Date()
+    };
+
+    await Song.findByIdAndUpdate(songId, { $push: { comments: newComment } });
+
+    res.redirect(`/song-info/${songId}`);
+  } catch (error) {
+    console.error("Error adding comment:", error);
+    res.status(500).send('Error adding comment');
+  }
+});
+
 
 
 

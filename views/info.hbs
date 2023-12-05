@@ -1,0 +1,46 @@
+{{!< layout}}
+<body class="userhome-bg">
+    <div class="content-container2">
+        <div class="song-info">
+            <h2>🎵 {{song.track_name}}</h1>
+            <p><strong>Album:</strong> {{song.album_name}}</p>
+            {{#if ep}}<p><strong>EP:</strong> {{song.ep}}</p>{{/if}}
+            <p><strong>Release Date:</strong> {{song.track_release}}</p>
+            <p><strong>Duration:</strong> {{song.duration}}</p>
+            {{#if featuring}}<p><strong>Featuring:</strong> {{song.featuring}}</p>{{/if}}
+            {{#if bonus_track}}<p><strong>Bonus Track:</strong> {{song.bonus_track}}</p>{{/if}}
+            <p><strong>Lyrics:</strong></p>
+            <p class="lyrics">{{{formatLyrics song.lyric}}}</p>
+        </div>
+
+        <h2>💭 What are your thoughts on this beautiful piece of art? </h2>
+        <div class="comments-section">
+            {{#each comments}}
+            <div class="comment">
+                <p><strong>{{this.username}}</strong> <span>on {{formatDate this.timestamp}}</span></p>
+                <p>{{this.text}}</p>
+            </div>
+            {{/each}}
+        </div>
+        
+        <!-- Adjusted Comment Submission Form -->
+        <form action="/add-comment/{{song._id}}" method="POST">
+            <input type="hidden" name="username" value="{{user.username}}">
+            <textarea name="text" placeholder="Your comment" required></textarea>
+            <div class="button-container">
+                <button type="submit">Post Comment</button>
+            </div>
+            
+        </form>
+
+        <div class="comments-container">
+            {{#each song.comments}}
+                <div class="comment">
+                <p><strong>{{this.username}}</strong> <span>on {{formatDate this.timestamp}}</span></p>
+                <p>{{this.text}}</p>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+</body>

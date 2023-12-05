@@ -7,7 +7,7 @@
     {{#if onMyMind.length}}
       <ul>
         {{#each onMyMind}}
-          <li>{{this.track_name}} - {{this.album_name}}</li>
+          <li><a href="/song-info/{{this._id}}">{{this.track_name}} </a> - {{this.album_name}}</li>
         {{/each}}
       </ul>
     {{else}}

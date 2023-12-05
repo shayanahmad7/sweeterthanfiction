@@ -1,5 +1,13 @@
 import mongoose from 'mongoose';
 
+
+const commentSchema = new mongoose.Schema({
+  username: String,
+  timestamp: { type: Date, default: Date.now },
+  text: String
+});
+
+
 const songSchema = new mongoose.Schema({
   album_name: String,
   ep: String,
@@ -13,7 +21,8 @@ const songSchema = new mongoose.Schema({
   single_release: String,
   track_release: String,
   duration: String,
-  lyric: String
+  lyric: String,
+  comments: [commentSchema]
 });
 
 const Song = mongoose.model('Song', songSchema, 'taylor_songs_complete');

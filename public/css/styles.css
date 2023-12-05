@@ -22,8 +22,8 @@ body {
 }
 
 .userhome-bg {
-  background: url('/images/userhomebackground.jpg') no-repeat right;
-  background-size: cover;
+  background: url('/images/userhomebackground.jpg')  no-repeat;
+  background-size: auto;
   opacity: 1;
 }
 
@@ -202,4 +202,43 @@ button:hover {
 
 .fa {
   margin-right: 8px;
+}
+
+.lyrics {
+  font-style: italic;
+  font-family: 'Dancing Script', cursive;
+  white-space: pre-line; /* Ensures line breaks and white spaces are respected */
+  font-size: 25px;
+}
+
+.comments-container {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  max-height: 400px; /* Adjust this height as necessary */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 3px solid #ccc; /* Optional: adds a border for better visibility */
+  padding: 10px;
+  border-radius: 5px;
+  background-color: transparent; /* Light background for the container */
+}
+
+.comment {
+  background-color: white; /* Slightly transparent white */
+  padding: 5px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.comment p {
+  margin: 5px 0;
+}
+
+.comment strong {
+  color: #333;
+}
+
+.comment span {
+  font-size: 0.8em;
+  color: #666;
 }

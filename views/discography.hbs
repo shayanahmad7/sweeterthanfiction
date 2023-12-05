@@ -13,7 +13,7 @@
             <tbody>
                 {{#each songs}}
                 <tr>
-                    <td>{{this.track_name}}</td>
+                    <td><a href="/song-info/{{this._id}}">{{this.track_name}}</a> </td>
                     <td>{{this.album_name}}</td>
                     <td>
                        <button class="heart-btn {{#if (isInWishlist this._id ../onMyMindIds)}}added{{/if}}" 
