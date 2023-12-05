@@ -143,6 +143,9 @@ app.get('/userhome', async (req, res) => {
 
 // Route for the search functionality
 app.get('/search', async (req, res) => {
+  if (!req.user) {
+    return res.redirect('/login');
+  }
   const query = req.query.query;
 
   // Handle empty search query
@@ -184,6 +187,9 @@ app.get('/on-my-mind', async (req, res) => {
 
 // Add to wishlist route
 app.post('/add-to-wishlist', async (req, res) => {
+  if (!req.user) {
+    return res.redirect('/login');
+  }
   const songId = req.body.songId;
   const userId = req.user.id; // Assuming you have user authentication in place
 
@@ -202,6 +208,9 @@ app.post('/add-to-wishlist', async (req, res) => {
 
 // Remove from wishlist route
 app.post('/remove-from-wishlist', async (req, res) => {
+  if (!req.user) {
+    return res.redirect('/login');
+  }
   const songId = req.body.songId;
   const userId = req.user.id; // Assuming you have user authentication in place
 
@@ -232,6 +241,7 @@ app.get('/profile', async (req, res) => {
     res.status(500).send('Error accessing profile');
   }
 });
+
 // Route to handle profile update
 app.post('/update-profile', async (req, res) => {
   if (!req.user) return res.redirect('/login');
@@ -247,6 +257,7 @@ app.post('/update-profile', async (req, res) => {
 });
 
 app.get('/discography', async (req, res) => {
+
   if (!req.user) return res.redirect('/login');
 
   try {
@@ -264,6 +275,9 @@ app.get('/discography', async (req, res) => {
 
 // Route to display song info
 app.get('/song-info/:songId', async (req, res) => {
+  if (!req.user) {
+    return res.redirect('/login');
+  }
   try {
     const song = await Song.findById(req.params.songId).populate('comments');
     if (!song) {
@@ -297,7 +311,15 @@ app.post('/add-comment/:songId', async (req, res) => {
   }
 });
 
-
+//Logout Route
+app.get('/logout', (req, res) => {
+  req.logout(function(err) {
+    if (err) { 
+      return next(err); 
+    }
+    res.redirect('/login');
+  });
+});
 
 
 // Start the server

@@ -153,13 +153,13 @@ button:hover {
 }
 
 .discography-table tbody {
-  display: block;
+  
   max-height: 500px; /* Set a max height for scroll */
   overflow-y: auto; /* Add vertical scroll */
 }
 
 .discography-table thead tr {
-  display: table;
+  
   width: 100%;
   table-layout: fixed; /* Fixed layout for the header */
 }

@@ -5,11 +5,24 @@
     <p>Songs that are on your mind right now, the ones you're obsessed with and loving. Share them with others or keep them as a log of your journey as a Swiftie.</p>
 
     {{#if onMyMind.length}}
-      <ul>
-        {{#each onMyMind}}
-          <li><a href="/song-info/{{this._id}}">{{this.track_name}} </a> - {{this.album_name}}</li>
-        {{/each}}
-      </ul>
+      <table class="discography-table">
+        <thead>
+          <tr>
+            <th>Track Name</th>
+            <th>Album Name</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {{#each onMyMind}}
+            <tr>
+              <td><a href="/song-info/{{this._id}}">{{this.track_name}}</a></td>
+              <td>{{this.album_name}}</td>
+
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
     {{else}}
       <div class="empty-wishlist">
         <p>😔 Your wishlist is empty.</p>
