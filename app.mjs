@@ -158,10 +158,12 @@ app.get('/search', async (req, res) => {
     const searchResults = await Song.find({
       track_name: { $regex: `\\b${query}\\b`, $options: 'i' }
     });
+    // Filter out null values and then map over the onMyMind array
+    const onMyMindIds = (req.user.onMyMind || []).filter(songId => songId).map(songId => songId.toString());
     if (searchResults.length === 0) {
       res.render('userhome', { message: `No search results to display :( `, name: req.user.name });
     } else {
-      res.render('userhome', { searchResults, name: req.user.name });
+      res.render('userhome', { searchResults, name: req.user.name , onMyMindIds: onMyMindIds});
     }
 
     

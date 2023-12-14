@@ -22,7 +22,7 @@ body {
 }
 
 .userhome-bg {
-  background: url('/images/userhomebackground.jpg')  no-repeat;
+  background: url('/images/userhomebackground.jpg')  repeat;
   background-size: auto;
   opacity: 1;
 }

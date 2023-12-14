@@ -28,7 +28,7 @@
                <a href="/song-info/{{this._id}}">{{this.track_name}} </a> - {{this.album_name}}
               <button class="heart-btn {{#if (isInWishlist this._id ../onMyMindIds)}}added{{/if}}" 
             data-song-id="{{this._id}}">{{#if (isInWishlist this._id ../onMyMindIds)}}❤️{{else}}🤍{{/if}}</button>
-
+            
 
 
           {{/each}}
