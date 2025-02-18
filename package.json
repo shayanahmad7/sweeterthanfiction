@@ -6,6 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.mjs",
+    "build": "echo 'No build step needed'"
   },
   "author": "",
   "license": "ISC",
